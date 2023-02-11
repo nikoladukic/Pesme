@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string('name');
             $table->integer('duration');
             $table->string('publishingHouse');
+            $table->foreignId('user_id');
+            $table->foreignId('category_id');
+            $table->foreignId('author_id');
             $table->timestamps();
         });
     }

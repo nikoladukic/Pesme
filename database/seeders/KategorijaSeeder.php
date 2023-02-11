@@ -16,19 +16,19 @@ class KategorijaSeeder extends Seeder
      */
     public function run()
     {
-        Category::create([
+        Kategorija::create([
             'name'=>'Pop'
         ]);
-        Category::create([
+        Kategorija::create([
             'name'=>'Classic'
         ]);
-        Category::create([
+        Kategorija::create([
             'name'=>'Folk'
         ]);
-        Category::create([
+        Kategorija::create([
             'name'=>'Rock'
         ]);
-        Category::create([
+        Kategorija::create([
             'name'=>'Pop-Rock'
         ]);
     }
