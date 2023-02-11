@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('pesmas', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->integer('duration');
+            $table->string('publishingHouse');
             $table->timestamps();
         });
     }
