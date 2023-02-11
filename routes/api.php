@@ -2,6 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\KategorijaController;
+use App\Http\Controllers\PesmaController;
+use App\Http\Controllers\API\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +21,31 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Route::post('/category',[CategoryController::class,'store']);
+
+Route::resource('users',UserController::class);
+
+Route::get('pesmas/izvodjac/{id}',[PesmaController::class,'getByIzvodjac']);
+
+Route::get('pesmas/category/{id}',[PesmaController::class,'getByCategory']);
+
+Route::resource('pesmas',BookController::class);
+
+
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('/profile', function(Request $request) {
+        return auth()->user();
+    });
+   
+    Route::get('my-pesmas',[PesmaController::class,'myPesmas']);
+
+    Route::post('/logout',[AuthController::class,'logout']);
+
+    Route::resource('pesmas',PesmaController::class)->only('store','update','destroy');
+    
+});
+
+Route::post('/register',[AuthController::class,'register']);
+
+Route::post('/login',[AuthController::class,'login']);
