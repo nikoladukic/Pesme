@@ -48,7 +48,7 @@ class IzvodjacController extends Controller
      */
     public function show(Izvodjac $izvodjac)
     {
-        return new IzvodjacResource($author);
+        return new IzvodjacResource($izvodjac);
     }
 
     /**

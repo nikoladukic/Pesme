@@ -22,10 +22,10 @@ class PesmaController extends Controller
 
         $my_pesma=array();
         foreach($pesmas as $pesma){
-            array_push($my_pesmas,new BookResource($pesma));
+            array_push($my_pesma,new PesmaResource($pesma));
         }
 
-        return $my_pesmas;
+        return $my_pesma;
     }
 
     /**
@@ -54,7 +54,7 @@ class PesmaController extends Controller
         $pesma->category_id=$request->category_id;
         $pesma->author_id=$request->author_id;
 
-        $book->save();
+        $pesma->save();
 
         return response()->json(['Pesma stored successfully',new PesmaResource($pesma)]);
     }
@@ -79,7 +79,7 @@ class PesmaController extends Controller
 
         $my_pesmas=array();
         foreach($pesmas as $pesma){
-            array_push($my_pesmas,new BookResource($pesma));
+            array_push($my_pesmas,new PesmaResource($pesma));
         }
 
         return $my_pesmas;
@@ -87,11 +87,11 @@ class PesmaController extends Controller
     public function myPesmas(Request $request){
         $pesmas=Pesma::get()->where('user_id',Auth::user()->id);
         if(count($pesmas)==0){
-            return 'You dont have saved books!';
+            return 'You dont have saved pesma!';
         }
         $my_pesmas=array();
-        foreach($pesmas as $book){
-            array_push($my_pesmas,new BookResource($book));
+        foreach($pesmas as $pesma){
+            array_push($my_pesmas,new PesmaResource($pesma));
         }
 
         return $my_pesmas;
@@ -106,7 +106,7 @@ class PesmaController extends Controller
 
         $my_pesmas=array();
         foreach($pesmas as $pesma){
-            array_push($my_pesmas,new BookResource($pesma));
+            array_push($my_pesmas,new PesmaResource($pesma));
         }
 
         return $my_pesmas;
@@ -136,8 +136,8 @@ class PesmaController extends Controller
             'name'=>'required|String|max:255',
             'duration'=>'required|Integer|max:30',
             'publishinghouse'=>'required|String|max:255',
-            'author_id'=>'required',
-            'category_id'=>'required'
+            'izvodjac_id'=>'required',
+            'kategorija_id'=>'required'
         ]);
         if($validator->fails()){
             return response()->json($validator->errors());
@@ -147,14 +147,14 @@ class PesmaController extends Controller
         $pesma->duration=$request->duration;
         $pesma->publishinghouse=$request->publishinghouse;
         
-        $pesma->author_id=$request->author_id;
-        $pesma->category_id=$request->category_id;
+        $pesma->izvodjac_id=$request->izvodjac_id;
+        $pesma->kategorija_id=$request->kategorija_id;
         $pesma->user_id=Auth::user()->id;
 
         $result=$pesma->update();
 
         if($result==false){
-            return response()->json('Problem updating book!');
+            return response()->json('Problem updating pesma!');
         }
         return response()->json(['Pesma updated successfully!',new PesmaResource($pesma)]);
     }
@@ -169,6 +169,6 @@ class PesmaController extends Controller
     {
         $pesma->delete();
 
-        return response()->json('Book '.$pesma->name .'deleted successfully!');
+        return response()->json('Pesma '.$pesma->name .'deleted successfully!');
     }
 }

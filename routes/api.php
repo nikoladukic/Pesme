@@ -28,9 +28,9 @@ Route::resource('users',UserController::class);
 
 Route::get('pesmas/izvodjac/{id}',[PesmaController::class,'getByIzvodjac']);
 
-Route::get('pesmas/category/{id}',[PesmaController::class,'getByCategory']);
+Route::get('pesmas/kategorija/{id}',[PesmaController::class,'getByCategory']);
 
-Route::resource('pesmas',BookController::class);
+Route::resource('pesmas',PesmaController::class);
 
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
