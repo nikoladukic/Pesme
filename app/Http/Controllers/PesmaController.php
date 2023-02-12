@@ -50,9 +50,10 @@ class PesmaController extends Controller
         $pesma=new Pesma;
         $pesma->name=$request->name;
         $pesma->publishinghouse=$request->publishinghouse;
+        $pesma->duration=$request->duration;
         $pesma->user_id=Auth::user()->id;
-        $pesma->category_id=$request->category_id;
-        $pesma->author_id=$request->author_id;
+        $pesma->kategorija_id=$request->kategorija_id;
+        $pesma->izvodjac_id=$request->izvodjac_id;
 
         $pesma->save();
 
